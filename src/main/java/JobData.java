@@ -104,7 +104,7 @@ public class JobData {
         for (HashMap<String, String> job : allJobs) {
             for(String key : job.keySet()) {
                 String value = job.get(key);
-                if(key.toLowerCase().contains(searchTerm) || value.toLowerCase().contains(searchTerm)) {
+                if(key.toLowerCase().contains(searchTerm.toLowerCase()) || value.toLowerCase().contains(searchTerm.toLowerCase())) {
                     if(!jobs.contains(searchTerm)) {
                         jobs.add(job);
                     }
