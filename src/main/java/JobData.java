@@ -1,4 +1,4 @@
-import org.apache.commons.csv.CSVFormat;
+    import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
@@ -79,7 +79,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -90,16 +90,29 @@ public class JobData {
     /**
      * Search all columns for the given term
      *
-     * @param value The search term to look for
-     * @return      List of all jobs with at least one field containing the value
-     */
-    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+//     * @param value The search term to look for
+//     * @return      List of all jobs with at least one field containing the value
+//     */
+    public static ArrayList<HashMap<String, String>> findByValue(String searchTerm) {
 
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+
+        for (HashMap<String, String> job : allJobs) {
+            for(String key : job.keySet()) {
+                String value = job.get(key);
+                if(key.toLowerCase().contains(searchTerm) || value.toLowerCase().contains(searchTerm)) {
+                    if(!jobs.contains(searchTerm)) {
+                        jobs.add(job);
+                    }
+                }
+            }
+
+        }
+        return jobs;
     }
 
     /**
